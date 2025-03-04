@@ -13,6 +13,7 @@ const App = () => {
         <Nav />
         <Hero />
         <Technologies />
+        <Projects />
       </div>
     </div>
   );
