@@ -1,8 +1,12 @@
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import project1 from "../projects/project1.jpg";
 import project2 from "../projects/project2.jpg";
 import project3 from "../projects/project3.jpg";
 
 const Projects = () => {
+    const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
+
     const projects = [
       {
         title: "Snake 2D",
@@ -25,18 +29,34 @@ const Projects = () => {
     ];
   
     return (
-      <div className="border-b border-slate-900 pb-4">
-        <h2 className="my-20 text-center text-4xl">Projekty</h2>
+      <div ref={ref} className="border-b border-slate-900 pb-4">
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="my-20 text-center text-4xl"
+        >
+          Projekty
+        </motion.h2>
         <div>
           {projects.map((project, index) => (
-            <div key={index} className="mb-8 flex flex-wrap lg:justify-center">
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              className="mb-8 flex flex-wrap lg:justify-center"
+            >
               <div className="w-full lg:w-1/4 flex justify-center">
-                <img
+                <motion.img
                   src={project.image}
                   width={150}
                   height={150}
                   alt={project.title}
                   className="mb-6 rounded shadow-lg"
+                  initial={{ scale: 0.9 }}
+                  animate={inView ? { scale: 1 } : {}}
+                  transition={{ duration: 0.5 }}
                 />
               </div>
               <div className="w-full max-w-xl lg:w-3/4">
@@ -44,16 +64,19 @@ const Projects = () => {
                 <p className="mb-4 text-slate-400">{project.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech, i) => (
-                    <span
+                    <motion.span
                       key={i}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={inView ? { opacity: 1, x: 0 } : {}}
+                      transition={{ duration: 0.4, delay: i * 0.1 }}
                       className="px-2 py-1 rounded bg-slate-700 text-white text-sm"
                     >
                       {tech}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -61,4 +84,3 @@ const Projects = () => {
   };
   
   export default Projects;
-  

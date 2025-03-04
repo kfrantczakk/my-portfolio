@@ -2,6 +2,7 @@ import Nav from "./components/nav";
 import Hero from "./components/Hero";
 import Technologies from "./components/Technologies";
 import Projects from "./components/Projects";
+import Footer from "./components/Footer";
 
 
 const App = () => {
