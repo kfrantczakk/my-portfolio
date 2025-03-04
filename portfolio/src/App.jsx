@@ -1,4 +1,5 @@
 import Nav from "./components/nav";
+import Hero from "./components/Hero";
 
 const App = () => {
   return (
